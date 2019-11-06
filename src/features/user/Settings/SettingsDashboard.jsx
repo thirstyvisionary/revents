@@ -22,7 +22,7 @@ const SettingsDashboard = () => {
         </Switch>
         
       </Grid.Column>
-      <Grid.Column width={12}>
+      <Grid.Column width={4}>
         <SettingsNav />
       </Grid.Column>
     </Grid>
