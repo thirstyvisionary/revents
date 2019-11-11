@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
 const PeopleDashboard = () => {
-  return (
-    <div>
-      <h1>PeopleDashboard</h1>
-    </div>
-  );
-};
+    return (
+        <div>
+            <h1>People dashboard</h1>
+        </div>
+    )
+}
 
-export default PeopleDashboard;
+export default PeopleDashboard

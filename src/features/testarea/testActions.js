@@ -11,4 +11,3 @@ export const decrementCounter = () => {
         type: DECREMENT_COUNTER
     }
 }
-

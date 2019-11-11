@@ -1,25 +1,24 @@
-import React from "react";
+import React from 'react';
+import { Grid } from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import { Grid } from "semantic-ui-react";
-import EventDetailedHeader from "./EventDetailedHeader";
-import EventDetailedInfo from "./EventDetailedInfo";
-import EventDetailedChat from "./EventDetailedChat";
-import EventDetailedSidebar from "./EventDetailedSidebar";
+import EventDetailedHeader from './EventDetailedHeader';
+import EventDetailedInfo from './EventDetailedInfo';
+import EventDetailedChat from './EventDetailedChat';
+import EventDetailedSidebar from './EventDetailedSidebar';
 
 const mapState = (state, ownProps) => {
-  const eventId = ownProps.match.params.id;
+    const eventId = ownProps.match.params.id;
 
-  let event = {};
+    let event = {};
 
-  if (eventId && state.events.length > 0) {
-    event = state.events.filter(event => event.id === eventId)[0]
-  }
+    if (eventId && state.events.length > 0) {
+        event = state.events.filter(event => event.id === eventId)[0]
+    }
 
-  return {
-    event
-  }
+    return {
+        event
+    }
 }
-
 
 const EventDetailedPage = ({event}) => {
   return (

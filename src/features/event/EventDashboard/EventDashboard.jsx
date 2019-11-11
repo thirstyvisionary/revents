@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import EventList from '../EventList/EventList';
-import { createEvent, deleteEvent, updateEvent } from '../eventActions';
+import {createEvent, updateEvent, deleteEvent} from '../eventActions';
 
-const mapState = state => ({
+const mapState = (state) => ({
   events: state.events
-});
+})
 
 const actions = {
   createEvent,
-  deleteEvent,
-  updateEvent
-};
+  updateEvent,
+  deleteEvent
+}
 
 class EventDashboard extends Component {
 
@@ -21,7 +21,7 @@ class EventDashboard extends Component {
   };
 
   render() {
-    const { events } = this.props;
+    const {events} = this.props;
     return (
       <Grid>
         <Grid.Column width={10}>
@@ -38,7 +38,4 @@ class EventDashboard extends Component {
   }
 }
 
-export default connect(
-  mapState,
-  actions
-)(EventDashboard);
+export default connect(mapState, actions)(EventDashboard);
