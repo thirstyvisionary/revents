@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { Header, Card, Image, Button } from 'semantic-ui-react';
 
 const UserPhotos = ({ photos, profile, deletePhoto, setMainPhoto }) => {
-    let filteredPhotos;
-    if (photos) {
-        filteredPhotos = photos.filter(photo => {
-            return photo.url !== profile.photoURL
-        })
-    }
+  let filteredPhotos;
+  if (photos) {
+    filteredPhotos = photos.filter(photo => {
+      return photo.url !== profile.photoURL;
+    });
+  }
   return (
     <Fragment>
       <Header sub color='teal' content='All Photos' />
@@ -25,7 +25,12 @@ const UserPhotos = ({ photos, profile, deletePhoto, setMainPhoto }) => {
                 <Button onClick={() => setMainPhoto(photo)} basic color='green'>
                   Main
                 </Button>
-                <Button onClick={() => deletePhoto(photo)} basic icon='trash' color='red' />
+                <Button
+                  onClick={() => deletePhoto(photo)}
+                  basic
+                  icon='trash'
+                  color='red'
+                />
               </div>
             </Card>
           ))}

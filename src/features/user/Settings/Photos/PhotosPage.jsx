@@ -53,21 +53,22 @@ const PhotosPage = ({
   loading
 }) => {
   const [files, setFiles] = useState([]);
+  const [cropResult, setCropResult] = useState('');
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     return () => {
       files.forEach(file => URL.revokeObjectURL(file.preview));
+      URL.revokeObjectURL(cropResult);
     };
-  }, [files]);
+  }, [files, cropResult]);
 
   const handleUploadImage = async () => {
     try {
       await uploadProfileImage(image, files[0].name);
       handleCancelCrop();
-      toastr.success('Success', 'Photo has been uplaoded');
+      toastr.success('Success', 'Photo has been uploaded');
     } catch (error) {
-      console.log(error);
       toastr.error('Oops', 'Something went wrong');
     }
   };
@@ -75,6 +76,15 @@ const PhotosPage = ({
   const handleCancelCrop = () => {
     setFiles([]);
     setImage(null);
+    setCropResult('');
+  };
+
+  const handleSetMainPhoto = async photo => {
+    try {
+      await setMainPhoto(photo);
+    } catch (error) {
+      toastr.error('Oops', error.message);
+    }
   };
 
   const handleDeletePhoto = async photo => {
@@ -82,14 +92,6 @@ const PhotosPage = ({
       await deletePhoto(photo);
     } catch (error) {
       toastr.error('Oops', error.message);
-    }
-  };
-
-  const handleSetMainPhoto = async photo => {
-    try {
-      await setMainPhoto(photo);
-    } catch (error) {
-      toastr('Oops', error.message);
     }
   };
 
@@ -106,7 +108,11 @@ const PhotosPage = ({
         <Grid.Column width={4}>
           <Header sub color='teal' content='Step 2 - Resize image' />
           {files.length > 0 && (
-            <CropperInput setImage={setImage} imagePreview={files[0].preview} />
+            <CropperInput
+              imagePreview={files[0].preview}
+              setCropResult={setCropResult}
+              setImage={setImage}
+            />
           )}
         </Grid.Column>
         <Grid.Column width={1} />
@@ -114,18 +120,14 @@ const PhotosPage = ({
           <Header sub color='teal' content='Step 3 - Preview & Upload' />
           {files.length > 0 && (
             <Fragment>
-              <div
-                className='img-preview'
-                style={{
-                  minHeight: '200px',
-                  minWidth: '200px',
-                  overflow: 'hidden'
-                }}
+              <Image
+                src={cropResult}
+                style={{ minHeight: '200px', minWidth: '200px' }}
               />
               <Button.Group>
                 <Button
-                  loading={loading}
                   onClick={handleUploadImage}
+                  loading={loading}
                   style={{ width: '100px' }}
                   positive
                   icon='check'
