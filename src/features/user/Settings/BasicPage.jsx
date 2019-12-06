@@ -26,7 +26,7 @@ class BasicPage extends Component {
             <Field
               name='gender'
               type='radio'
-              valzzze='male'
+              valzzzze='male'
               label='Male'
               component={RadioInput}
             />
